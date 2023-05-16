@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { QuestionCard } from './QuestionCard';
 
 function App() {
+  let [quizStarted,setQuizStarted] = useState(false)
+  let [questions,setQuestions] = useState()
+  let [answers,setAnswers] = useState()
+  let [useranswer,setUseranswer] = useState()
+  let [disabled,setDisabled] = useState()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <div className='Quiz'>Quiz</div>
+     {quizStarted?
+     <div className='score'>Score: 5</div>:
+     <button className='strt-btn' onClick={()=>setQuizStarted(true)}>Start</button>
+     }
+     <QuestionCard />
     </div>
   );
 }
