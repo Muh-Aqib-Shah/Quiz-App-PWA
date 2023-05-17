@@ -1,15 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
 body {
   text-align: center;
   background-image: url("./images/background.jpg");
 }
 .Quiz{
-  font-size: 350%;
+  margin: 2%;
+  font-size: 100px;
   font-weight: 600;
+  font-family: 'Bangers',sans-serif;
+  color: blue;
 }
 .score{
   margin-top: 3%;
   font-size: x-large;
   font-weight: 500;
+  color: white;
 }
 .strt-btn{
   margin-top: 3%;
@@ -40,6 +46,8 @@ body {
   width: 98%;
   height: 15%;
   margin: 1.5%;
+  font-size: large;
+  font-weight: 400;
   border-radius: 10px 10px 10px 10px;
   background-image: linear-gradient(whitesmoke,skyblue);
 }
@@ -49,9 +57,7 @@ body {
 #wrong{
   background-image: linear-gradient(red,red);
 }
-#basic{
-  background-image: linear-gradient(whitesmoke,skyblue);
-}
+
 .next-btn{
   margin-top: 2%;
   width: 100px;
