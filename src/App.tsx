@@ -52,17 +52,17 @@ function App() {
     }
   }
 
-  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const checkAnswer = (event: React.MouseEvent<HTMLButtonElement>) => {
   setDisabled(true)
-   const corr = e.currentTarget.value
+   const corr = event.currentTarget.value
    console.log("VAL:",corr);
-   console.log('ID:',e.currentTarget.id);
+   console.log('ID:',event.currentTarget.id);
    
   if(corr === questions[questionNum].correct_answer){
     setScore(prev=>prev+1)
-     e.currentTarget.id = "correct"}
+     event.currentTarget.id = "correct"}
   else
-   e.currentTarget.id = "wrong"
+   event.currentTarget.id = "wrong"
    setOptions("showAnswer")
 
  }
