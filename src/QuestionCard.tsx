@@ -1,4 +1,3 @@
-import { SignKeyObjectInput } from 'crypto'
 import React from 'react'
 
 type DataTypes = {
@@ -6,15 +5,26 @@ type DataTypes = {
   answers: string[],
   callback : any,
   questionNum: number;
-  userAnswer: string;
+  Disabled: boolean;
   TotalQuestions: number;
 }
 
-export const QuestionCard: React.FC<DataTypes> = ({questions,answers,callback,questionNum,userAnswer,TotalQuestions}) => {
+export const QuestionCard: React.FC<DataTypes> = ({questions,answers,callback,questionNum,Disabled,TotalQuestions}) => {
 
     return (
-        <div>
+      <div className='quest-container'>
+        <div className='quest-box'>
+          <div className='quest-status'>Question: {questionNum}/{TotalQuestions}</div>
+          <div className='quest' dangerouslySetInnerHTML={{__html:questions}} ></div>
+          <div className='answer-box'>
+            {
+              answers.map((answer,index) =>(
+                <button id= {`answr-btn${index}`} className="basic" value={answer} onClick={callback} disabled={Disabled} dangerouslySetInnerHTML={{__html:answer}} />
+              ))
+            }
+          </div>
 
+        </div>
         </div>
     )
 }

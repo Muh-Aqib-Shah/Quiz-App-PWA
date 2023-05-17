@@ -1,21 +1,73 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { QuestionCard } from './QuestionCard';
+import { Difficulty, QuestionsAPI,Question } from './QuestionAPI';
+
 
 function App() {
+  
+  const TOTAL_QUESTIONS = 10
+  const LISTED_ANSWERS = document.getElementsByClassName("basic")
+  
+  let [loading,setLoading] = useState(true)
   let [quizStarted,setQuizStarted] = useState(false)
-  let [questions,setQuestions] = useState()
-  let [answers,setAnswers] = useState()
-  let [useranswer,setUseranswer] = useState()
-  let [disabled,setDisabled] = useState()
+  let [questions,setQuestions] = useState<Question[]>([])
+  let [questionNum,setQuestionNum] = useState(0)
+  let [score,setScore] = useState(0)
+  let [useranswer,setUseranswer] = useState(false)
+  let [disabled,setDisabled] = useState(true)
+
+  const startQUIZ = async() => {
+    setLoading(true);
+    LISTED_ANSWERS.map(ans=>
+      console.log("ANS:",ans);
+      )
+    console.log("ITEMS",LISTED_ANSWERS);
+    
+    const data = await QuestionsAPI(TOTAL_QUESTIONS,Difficulty.EASY)
+    setQuestions(data)
+    setLoading(false);
+    setQuizStarted(true)
+}
+ const nextQuestion = () => {
+  const q_number = questionNum + 1
+  if(q_number >= TOTAL_QUESTIONS)
+    setQuizStarted(false)
+  else
+   setQuestionNum(q_number)  
+ }
+
+  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+   const corr = e.currentTarget.value
+   console.log("VAL:",corr);
+   console.log('ID:',e.currentTarget.id);
+   
+  if(corr === questions[questionNum].correct_answer){
+    setScore(prev=>prev+1)
+     e.currentTarget.id = "correct"}
+  else
+   e.currentTarget.id = "wrong"
+ }
+
   return (
     <div className="App">
      <div className='Quiz'>Quiz</div>
      {quizStarted?
-     <div className='score'>Score: 5</div>:
-     <button className='strt-btn' onClick={()=>setQuizStarted(true)}>Start</button>
+     <div className='score'>Score: {score}</div>:
+     <button className='strt-btn' onClick={()=>startQUIZ()}>Start</button>
      }
-     <QuestionCard />
+     {quizStarted && !loading ?
+     <QuestionCard
+      questionNum = {questionNum+1}
+      questions = {questions[questionNum].question}
+      answers={questions[questionNum].answers}
+      callback={checkAnswer}
+      Disabled={!disabled}
+      TotalQuestions={TOTAL_QUESTIONS} />:null}
+     {quizStarted && disabled?
+     <button className='next-btn' onClick={()=>nextQuestion()}>Next</button> : null
+     } 
+
     </div>
   );
 }
