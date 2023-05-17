@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import './App.css';
 import { QuestionCard } from './QuestionCard';
 import { Difficulty, QuestionsAPI,Question } from './QuestionAPI';
-import useWebAnimations, { bounce } from "@wellyshen/use-web-animations";
 
 
 function App() {
-  let { ref,animate } = useWebAnimations()
   const TOTAL_QUESTIONS = 10
   const OPTIONS = document.getElementsByClassName("basic")  
   
@@ -20,7 +18,6 @@ function App() {
   const startQUIZ = async() => {
     setLoading(true);
     const data = await QuestionsAPI(TOTAL_QUESTIONS,Difficulty.EASY)
-    animate({...bounce})
     setQuestions(data)
     setLoading(false);
     setQuizStarted(true)
@@ -74,7 +71,7 @@ function App() {
     <div className="App">
      <div className='Quiz'>Quiz</div>
      {quizStarted?
-     <div className='score' ref={ref as React.RefObject<HTMLDivElement>}>Score: {score}</div>:
+     <div className='score'>Score: {score}</div>:
      <button className='strt-btn' onClick={()=>startQUIZ()}>Start</button>
      }
      {quizStarted && !loading ?
