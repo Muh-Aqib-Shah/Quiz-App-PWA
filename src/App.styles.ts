@@ -47,7 +47,7 @@ export const StyledWrapper = styled.div`
   font-size:xx-large;
   font-weight: 500;
   margin: 50px;
-  color: wheat;
+  color: crimson;
 }
 .quest-container{
   height: 45vh;
@@ -97,19 +97,3 @@ export const StyledWrapper = styled.div`
   background-color: indigo;
   color: black;
 }`;
-
-
-/*html{
-    height:100%
-}
-body
-  height:100vh;
-  text-align: center;
-  background-image: url(${background});
-  background-repeat: no-repeat;
-  background-size: cover;
-  display:flex;
-        
-}
-
-`*/
