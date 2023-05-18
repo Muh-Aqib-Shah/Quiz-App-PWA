@@ -9,9 +9,9 @@ export const GlobalStyle= createGlobalStyle`
 }
 body{
     height: 100vh;
-    background-color: #ffa600;
     background-color: yellow;
     overflow: hidden;
+
 }
 `
 
