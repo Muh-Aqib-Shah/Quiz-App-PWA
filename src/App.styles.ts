@@ -1,5 +1,4 @@
 import { createGlobalStyle,styled } from "styled-components";
-import background from './images/background.jpg'
 
 export const GlobalStyle= createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@500&display=swap');
@@ -11,7 +10,7 @@ export const GlobalStyle= createGlobalStyle`
 body{
     height: 100vh;
     background-color: #ffa600;
-    background-image: url(${background});
+    background-color: yellow;
     overflow: hidden;
 }
 `
@@ -30,7 +29,6 @@ export const StyledWrapper = styled.div`
   margin-top: 3%;
   font-size: x-large;
   font-weight: 500;
-  color: white;
   text-align:center;
 }
 .strt-btn{
