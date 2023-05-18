@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './App.css';
 import { QuestionCard } from './QuestionCard';
 import { Difficulty, QuestionsAPI,Question } from './QuestionAPI';
+import { StyledWrapper } from './App.styles';
 
 
 function App() {
@@ -68,14 +68,14 @@ function App() {
  }
 
   return (
+    
+    <StyledWrapper>
     <div className="App">
-     <div className='Quiz'>Quiz</div>
-     {quizStarted?
-     <div className='score'>Score: {score}</div>:
-     <button className='strt-btn' onClick={()=>startQUIZ()}>Start</button>
-     }
+    
      {quizStarted && !loading ?
      <QuestionCard
+      quizStarted =  {quizStarted}
+      score = {score}
       questionNum = {questionNum+1}
       questions = {questions[questionNum].question}
       answers={questions[questionNum].answers}
@@ -85,8 +85,10 @@ function App() {
      {quizStarted && disabled?
      <button className='next-btn' onClick={()=>nextQuestion()}>Next</button> : null
      } 
-
+    
     </div>
+    </StyledWrapper>
+   
   );
 }
 
