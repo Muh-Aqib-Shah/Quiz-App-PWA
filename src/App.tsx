@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
 import { QuestionCard } from './QuestionCard';
 import { Difficulty, QuestionsAPI,Question } from './QuestionAPI';
-import { StyledWrapper } from './App.styles';
-
+import { GlobalStyle,StyledWrapper } from './App.styles';
 
 function App() {
   const TOTAL_QUESTIONS = 10
   const OPTIONS = document.getElementsByClassName("basic")  
   
-  let [loading,setLoading] = useState(true)
-  let [quizStarted,setQuizStarted] = useState(false)
+  let [loading,setLoading] = useState<boolean>(false)
+  let [quizStarted,setQuizStarted] = useState<boolean>(false)
   let [questions,setQuestions] = useState<Question[]>([])
-  let [questionNum,setQuestionNum] = useState(0)
-  let [score,setScore] = useState(0)
-  let [disabled,setDisabled] = useState(false)
+  let [questionNum,setQuestionNum] = useState<number>(0)
+  let [score,setScore] = useState<number>(0)
+  let [disabled,setDisabled] = useState<boolean>(false)
 
   const startQUIZ = async() => {
+    setQuizStarted(true)
     setLoading(true);
     const data = await QuestionsAPI(TOTAL_QUESTIONS,Difficulty.EASY)
     setQuestions(data)
     setLoading(false);
-    setQuizStarted(true)
     setQuestionNum(0)
     setScore(0)
 }
@@ -68,14 +67,18 @@ function App() {
  }
 
   return (
-    
+    <>
+    <GlobalStyle />
     <StyledWrapper>
-    <div className="App">
-    
+      <center>
+     <span className='Quiz'>Quiz</span></center>
+     {quizStarted?
+     <div className='score'>Score: {score}</div>:<center>
+     <button className='strt-btn' onClick={()=>{startQUIZ()}}>Start</button></center>
+     }
+     {loading? <center id="loadingtxt">Loading...</center>:null}
      {quizStarted && !loading ?
      <QuestionCard
-      quizStarted =  {quizStarted}
-      score = {score}
       questionNum = {questionNum+1}
       questions = {questions[questionNum].question}
       answers={questions[questionNum].answers}
@@ -83,12 +86,10 @@ function App() {
       Disabled={disabled}
       TotalQuestions={TOTAL_QUESTIONS} />:null}
      {quizStarted && disabled?
-     <button className='next-btn' onClick={()=>nextQuestion()}>Next</button> : null
-     } 
-    
-    </div>
+     <center>
+     <button className='next-btn' onClick={()=>nextQuestion()}>Next</button></center> : null}
     </StyledWrapper>
-   
+    </>
   );
 }
 

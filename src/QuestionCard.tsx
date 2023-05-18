@@ -1,9 +1,6 @@
 import React from 'react'
-import { Wrapper } from './QuestionCard.styles';
 
 type DataTypes = {
-  quizStarted: boolean,
-  score: number;
   questions: string,
   answers: string[],
   callback : any,
@@ -12,15 +9,10 @@ type DataTypes = {
   TotalQuestions: number;
 }
 
-export const QuestionCard: React.FC<DataTypes> = ({quizStarted,score,questions,answers,callback,questionNum,Disabled,TotalQuestions}) => {
+export const QuestionCard: React.FC<DataTypes> = ({questions,answers,callback,questionNum,Disabled,TotalQuestions}) => {
 
    return (
-      <Wrapper>
-     <div className='Quiz'>Quiz</div>
-     {quizStarted?
-     <div className='score'>Score: {score}</div>:
-     <button className='strt-btn' onClick={()=>{}}>Start</button>
-     }
+      <>
       <div className='quest-container'>
         <div className='quest-box'>
           <div className='quest-status'>Question: {questionNum}/{TotalQuestions}</div>
@@ -32,9 +24,8 @@ export const QuestionCard: React.FC<DataTypes> = ({quizStarted,score,questions,a
               ))
             }
           </div>
-
         </div>
         </div>
-        </Wrapper>
+        </>       
     )
 }
