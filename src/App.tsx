@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { QuestionCard } from './QuestionCard';
 import { Difficulty, QuestionsAPI,Question } from './QuestionAPI';
 import { GlobalStyle,StyledWrapper } from './App.styles';
+import { Alert } from '@mui/material';
 
 function App() {
   const TOTAL_QUESTIONS = 10
@@ -13,12 +14,14 @@ function App() {
   let [questionNum,setQuestionNum] = useState<number>(0)
   let [score,setScore] = useState<number>(0)
   let [disabled,setDisabled] = useState<boolean>(false)
+  let [offline,SetOffline] = useState<boolean>(false)
 
   const startQUIZ = async() => {
     setQuizStarted(true)
     setLoading(true);
     const data = await QuestionsAPI(TOTAL_QUESTIONS,Difficulty.EASY)
-    setQuestions(data)
+    setQuestions(data.question_arr)
+    SetOffline(data.offline)
     setLoading(false);
     setQuestionNum(0)
     setScore(0)
@@ -71,6 +74,9 @@ function App() {
     <GlobalStyle />
     <StyledWrapper>
       <center>
+        {offline ? <Alert sx={{position: "absolute", left: 0,top:0}} severity="error">
+          You are viewing an Offline version of this page!
+         <br/> Some functionality may not be available</Alert>: null}
      <span className='Quiz'>Quiz</span></center>
      {quizStarted?
      <div className='score'>Score: {score}</div>:<center>

@@ -3,11 +3,16 @@ import { Shuffler } from "./Shuffler";
 export const QuestionsAPI = async (Amount: number,Difficulty: Difficulty) =>{
    const API = `https://opentdb.com/api.php?amount=${Amount}&difficulty=${Difficulty}&type=multiple`;
    let result = await (await fetch(API)).json()
-   return result.results.map((question: Question)=>(
+   console.log("RESULT:",result);
+   
+   return {
+    offline: result?.offline ?? false,
+    
+    question_arr: result.results.map((question: Question)=>(
    {
     ...question,
     answers: Shuffler([...question.incorrect_answers, question.correct_answer])
-   }))
+   }))}
    
 }
 
