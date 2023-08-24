@@ -19,7 +19,7 @@ reportWebVitals();
 let endpoint: string = `${process.env.PUBLIC_URL}/ServiceWorker.js`
 
 if("serviceWorker" in navigator){
-  navigator.serviceWorker.register(endpoint,{
+  navigator.serviceWorker.register("static/js/ServiceWorker.js",{
     scope:"/"
   });
 }

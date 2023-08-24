@@ -57,8 +57,6 @@ function App() {
   const checkAnswer = (event: React.MouseEvent<HTMLButtonElement>) => {
   setDisabled(true)
    const corr = event.currentTarget.value
-   console.log("VAL:",corr);
-   console.log('ID:',event.currentTarget.id);
    
   if(corr === questions[questionNum].correct_answer){
     setScore(prev=>prev+1)
