@@ -16,7 +16,7 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
-let endpoint: string = `${process.env.PUBLIC_URL}/ServiceWorker.js`
+//let endpoint: string = `${process.env.PUBLIC_URL}/ServiceWorker.js`
 
 if("serviceWorker" in navigator){
   navigator.serviceWorker.register("static/js/ServiceWorker.js",{
